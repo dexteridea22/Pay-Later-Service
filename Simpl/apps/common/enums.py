@@ -13,3 +13,4 @@ class PaymentStatus(Enum):
 
     """
     SUCCESS, DECLINED, HOLD = 1, 2, 3
+

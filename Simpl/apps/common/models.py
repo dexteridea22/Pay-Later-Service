@@ -1,5 +1,5 @@
 from abc import ABC
-from applications.common.enums import AccountStatus
+from Simpl.apps.common.enums import AccountStatus
 
 
 class User(ABC):

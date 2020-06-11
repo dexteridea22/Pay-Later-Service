@@ -1,6 +1,8 @@
-from applications.common.models import User
+from Simpl.apps.common.models import User
+from Simpl.apps.common.constants import DISCOUNT_MAX_PERCENTAGE
 
 
+# discount read/write allow both getter and setter on Merchant side
 class Merchant(User):
     """
 
@@ -20,6 +22,8 @@ class Merchant(User):
         print("setter")
         if discount < 0:
             raise ValueError("Discount value cannot be negative")
+        elif discount > DISCOUNT_MAX_PERCENTAGE:
+            raise ValueError("Discount percentage cannot exceed 100 :)")
         self.__discount = discount
 
     def _set_discount(self, discount):
