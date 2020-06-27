@@ -1,5 +1,5 @@
 from ..cmd import Cmd
-from models.transactions import Transaction
+from Simpl.models.transactions import Transaction
 
 
 class Cmdreporttotaldues(Cmd):

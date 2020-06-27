@@ -1,6 +1,6 @@
 from ..cmd import Cmd
-from models.customers import Customer
-from models.merchants import Merchant
+from Simpl.models.merchants import Merchant
+from Simpl.models.customers import Customer
 
 class Cmdreportdiscount(Cmd):
 

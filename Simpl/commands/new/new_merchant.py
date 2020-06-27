@@ -1,5 +1,5 @@
 from ..cmd import Cmd
-from models.merchants import Merchant
+from Simpl.models.merchants import Merchant
 
 
 class Cmdnewmerchant(Cmd):

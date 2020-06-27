@@ -2,7 +2,8 @@ from ..cmd import Cmd
 from .new_customer import Cmdnewuser
 from .new_merchant import Cmdnewmerchant
 from .new_transaction import Cmdnewtrans
-from dispatcher import Dispatcher
+from Simpl.dispatcher import Dispatcher
+from Simpl.models.exceptions import InvalidCommand
 
 new_dispatcher = Dispatcher()
 new_dispatcher.add_command('user', Cmdnewuser)
@@ -16,5 +17,8 @@ class Cmdnew(Cmd):
         try:
             new_dispatcher.dispatch(command, *args)
 
-        except ValueError:
-            raise Exception("Invalid command")
+        except KeyError as k :
+            raise Exception("Invalid keywords")
+
+        except InvalidCommand as e:
+            raise InvalidCommand("Invalid arguments to new")

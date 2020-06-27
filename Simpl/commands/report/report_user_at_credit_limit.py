@@ -1,5 +1,5 @@
 from cmd import Cmd
-from models.customers import Customer
+from Simpl.models.customers import Customer
 
 
 class Cmdreportuseratcredit(Cmd):

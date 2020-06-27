@@ -1,4 +1,5 @@
 from typing import Type
+from Simpl.models.exceptions import InvalidCommand
 
 
 class Dispatcher:
@@ -12,5 +13,11 @@ class Dispatcher:
         self._command[command] = handler
 
     def dispatch(self, command, *args):
-        handler = self._command[command]
-        handler().process(*args)
+        try:
+            handler = self._command[command]
+        except KeyError as k:
+            raise Exception("Invalid keywords")
+        try:
+            handler().process(*args)
+        except TypeError:
+            raise InvalidCommand("Missing args")

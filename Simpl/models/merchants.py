@@ -1,5 +1,5 @@
 from .users import User
-
+from Simpl.models.exceptions import InvalidDiscount
 
 # discount read/write allow both getter and setter on Merchant side
 class Merchant(User):
@@ -8,9 +8,9 @@ class Merchant(User):
     """
     instances = {}
 
-    def __init__(self, name: str, email_id: str, discount: int):
+    def __init__(self, name: str, email: str, discount: int):
         Merchant.instances[name] = self
-        super().__init__(name=name, email_id=email_id)
+        super().__init__(name=name, email=email)
         self.discount = discount
 
     @property
@@ -19,8 +19,9 @@ class Merchant(User):
 
     @discount.setter
     def discount(self, value: float):
-        # if value < 0:
-        #     raise ValueError("Discount value cannot be negative")
-        # elif value > 100:
-        #     raise ValueError("Discount percentage cannot exceed 100 :)")
+        value = int(value)
+        if value < 0:
+            raise InvalidDiscount("Discount value cannot be negative")
+        elif value > 100:
+            raise InvalidDiscount("Discount percentage cannot exceed 100")
         self._discount = value

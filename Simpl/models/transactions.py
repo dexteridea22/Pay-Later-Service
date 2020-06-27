@@ -1,3 +1,6 @@
+from Simpl.models.exceptions import InvalidTransaction
+
+
 class Transaction:
     counter = 1
     instances = {}
@@ -17,7 +20,7 @@ class Transaction:
     @amount.setter
     def amount(self, value) -> None:
         if value <= 0:
-            raise ValueError(
+            raise InvalidTransaction(
                 "Amount should not be greater than 0"
             )
         self._amount = value

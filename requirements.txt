@@ -1,0 +1,6 @@
+pip~=20.1.1
+py~=1.8.2
+setuptools~=47.1.1
+dispatcher~=1.0
+django-commands~=0.7
+mock~=4.0.2

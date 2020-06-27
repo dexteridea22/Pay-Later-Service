@@ -1,16 +1,17 @@
 from ..cmd import Cmd
-from models.transactions import Transaction
-from models.customers import Customer
+from Simpl.models.transactions import Transaction
+from Simpl.models.customers import Customer
+from Simpl.models.exceptions import *
 
 
 class Cmdnewtrans(Cmd):
 
     def process(self, user: str, merchant: str, amount: int):
+        customer = Customer.instances.get(user)
         try:
-            customer = Customer.instances.get(user)
-            if customer.is_transaction_allowed(amount):
-                Transaction(user, merchant, amount)
-                customer.use_credit(amount)
-                print("transaction successfull")
-        except ValueError:
-            raise Exception("Transaction failed due to invalid amount")
+            customer.is_transaction_allowed(amount)
+            Transaction(user, merchant, amount)
+            customer.use_credit(amount)
+        except InvalidTransaction:
+            raise InvalidTransaction(
+                "Invalid amount,Either Amount negative or higher then credit limit")
