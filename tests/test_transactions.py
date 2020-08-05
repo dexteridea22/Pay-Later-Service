@@ -13,20 +13,20 @@ class TestTransaction:
         self.merchant = Merchant("mer", "dss@dsds.com", 10)
         self.trans_obj = Cmdnewtrans()
 
-    @mock.patch("Simpl.models.customers.Customer.is_transaction_allowed",
-                side_effect=InvalidTransaction())
+    @mock.patch("Simpl.models.customers.Customer",
+                side_effect=InsufficientCreditException())
     def test_transaction_invalid_amount(self, mock_exceptions):
         try:
             self.trans_obj.process("usa", "mer", 120)
             assert False
-        except InvalidTransaction as e:
-            assert e.args[0] == "Invalid amount,Either Amount negative or higher then credit limit"
+        except InsufficientCreditException as e:
+            assert e.args[0] == "rejected: reason : Credit Limit"
 
     @mock.patch("Simpl.models.customers.Customer.use_credit",
-                side_effect=InvalidTransaction())
+                side_effect=InvalidTransactionAmountException())
     def test_transaction_negative_amount(self, mock_exceptions):
         try:
             self.trans_obj.process("usa", "mer", -120)
             assert False
-        except InvalidTransaction as e:
-            assert e.args[0] == "Invalid amount,Either Amount negative or higher then credit limit"
+        except InvalidTransactionAmountException as e:
+            assert e.args[0] == "Amount should be greater than 0"

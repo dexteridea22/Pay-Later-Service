@@ -2,7 +2,7 @@ from typing import Type
 from Simpl.models.exceptions import InvalidCommand
 
 
-class Dispatcher:
+class Transmitter:
 
     # _command = {}
 
@@ -12,7 +12,7 @@ class Dispatcher:
     def add_command(self, command, handler):
         self._command[command] = handler
 
-    def dispatch(self, command, *args):
+    def transmit(self, command, *args):
         try:
             handler = self._command[command]
         except KeyError as k:

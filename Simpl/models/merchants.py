@@ -9,9 +9,9 @@ class Merchant(User):
     instances = {}
 
     def __init__(self, name: str, email: str, discount: int):
-        Merchant.instances[name] = self
         super().__init__(name=name, email=email)
         self.discount = discount
+        Merchant.instances[name] = self
 
     @property
     def discount(self):

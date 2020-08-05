@@ -1,4 +1,4 @@
-class CommandExeption(Exception):
+class CommandException(Exception):
     pass
 
 
@@ -46,7 +46,7 @@ class InvalidDiscount(ModelMerchantException):
     pass
 
 
-class InvalidCommand(CommandExeption):
+class InvalidCommand(CommandException):
     pass
 
 
@@ -57,5 +57,18 @@ class InvalidAmountValue(ModelCustomerException):
 class InvalidTransaction(ModelTransactionException):
     pass
 
+
 class InvalidDiscount(ModelMerchantException):
+    pass
+
+
+class InsufficientCreditException(ModelTransactionException):
+    pass
+
+
+class InvalidTransactionAmountException(ModelTransactionException):
+    pass
+
+
+class InvalidUserException(ModelCustomerException):
     pass

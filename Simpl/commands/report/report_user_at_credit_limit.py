@@ -12,6 +12,6 @@ class Cmdreportuseratcredit(Cmd):
     def get_user_at_credit_limit():
         count = 0
         for cust in Customer.instances.keys():
-            if Customer.instances.get(cust).remaining_credit == 0:
+            if Customer.instances.get(cust)._remaining_credit == 0:
                 count += 1
         return count
